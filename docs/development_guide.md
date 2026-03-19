@@ -1,4 +1,9 @@
 
+# 来由
+此版本用于解决  
+[claude code router + openrouter 无法正确处理图片 #372](https://github.com/musistudio/claude-code-router/issues/372)
+以下是使用方法
+
 # 1. 先停止当前服务                                                                                                                               
 ccr stop                                                                                                                                          
                                                                                                                                                 
