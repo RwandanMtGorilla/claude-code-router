@@ -3,7 +3,10 @@
 ccr stop                                                                                                                                          
                                                                                                                                                 
 # 2. 在项目根目录构建所有包                                                                                                                       
-cd D:\projects\claude-code-router       
+cd D:\projects\claude-code-router 
+
+npm install -g pnpm
+
 pnpm install
 pnpm build                                                                                                                                        
               
