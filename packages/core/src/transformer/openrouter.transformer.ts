@@ -42,6 +42,36 @@ export class OpenrouterTransformer implements Transformer {
         }
       });
     }
+
+    // Handle Qwen 3.6 models that require reasoning to be enabled
+    // These models don't accept thinking parameters and require reasoning to be mandatory
+    if (/qwen[\s_-]*3\.?6/i.test(request.model)) {
+      this.logger?.debug({
+        model: request.model,
+        thinking: request.thinking,
+        enable_thinking: request.enable_thinking,
+        reasoning: request.reasoning
+      }, 'Qwen 3.6 detected - removing thinking params');
+
+      // Remove all thinking-related parameters regardless of their values
+      if (request.thinking) {
+        delete request.thinking;
+      }
+      if (request.enable_thinking !== undefined) {
+        delete request.enable_thinking;
+      }
+      if (request.reasoning) {
+        delete request.reasoning;
+      }
+
+      this.logger?.debug({
+        model: request.model,
+        thinking: request.thinking,
+        enable_thinking: request.enable_thinking,
+        reasoning: request.reasoning
+      }, 'Qwen 3.6 - after removal');
+    }
+
     Object.assign(request, this.options || {});
     return request;
   }
